@@ -35,7 +35,7 @@ def set_args():
                         default='cpu',
                         help='The device, cuda/cpu')
     parser.add_argument('--lr', type=float,
-                        default=0.001,
+                        default=0.0001,
                         help='Learning rate')
     parser.add_argument('--epoch', type=int,
                         default=3000,
@@ -47,13 +47,13 @@ def set_args():
                         default=0.5,
                         help='Threshold of edges')
     parser.add_argument('--graphdim1', type=int,
-                        default=2048,
+                        default=512,
                         help='Dimensions of graph layer 1')
     parser.add_argument('--graphdim2', type=int,
-                        default=1024,
+                        default=256,
                         help='Dimensions of graph layer 2')
     parser.add_argument('--graphdim3', type=int,
-                        default=512,
+                        default=128,
                         help='Dimensions of graph layer 3 and MLP layer 1')
     parser.add_argument('--mlpdim2', type=int,
                         default=256,
@@ -124,7 +124,7 @@ def load_graph_model(method):
     elif method == 'HRMG':
         from model.HRMG import HRMG
         graph_model = HRMG(in_dim=x.shape[1],  
-                            hidden_dims=(args.graphdim1, args.graphdim2),
+                            hidden_dims=(args.graphdim3, args.graphdim3),
                             out_dim=args.graphdim3).to(args.device)
 
     return graph_model
